@@ -1,0 +1,93 @@
+package Main;
+
+public class App {
+	/**
+	 * Foglio riassuntivo: Tipi primitivi & Casting in Java
+	 *
+	 * - Tipi primitivi: boolean, byte, short, int, long, float, double, char
+	 * - Widening (implicito): conversioni verso un tipo più capiente (es. int -> long -> double)
+	 * - Narrowing (esplicito): conversioni verso un tipo meno capiente (serve (Tipo), può troncare/overflow)
+	 * - Promozione aritmetica: byte/short/char in espressioni diventano int
+	 * - char <-> int: i char sono codici Unicode a 16 bit
+	 * - Stringhe: NON si “castano” a numeri; si fa parse/format
+	 */
+	
+
+	    public static void main(String[] args) {
+	        sez("1) Tipi primitivi e range (costanti MIN/MAX delle classi wrapper)");
+	        System.out.printf("boolean: %s / %s%n", true, false);
+	        System.out.printf("byte:   %d .. %d%n", Byte.MIN_VALUE,   Byte.MAX_VALUE);
+	        System.out.printf("short:  %d .. %d%n", Short.MIN_VALUE,  Short.MAX_VALUE);
+	        System.out.printf("int:    %d .. %d%n", Integer.MIN_VALUE, Integer.MAX_VALUE);
+	        System.out.printf("long:   %d .. %d%n", Long.MIN_VALUE,   Long.MAX_VALUE);
+	        System.out.printf("float:  %e .. %e%n", Float.MIN_VALUE,  Float.MAX_VALUE);
+	        System.out.printf("double: %e .. %e%n", Double.MIN_VALUE, Double.MAX_VALUE);
+	        System.out.printf("char:   \\u0000 .. \\uFFFF (0..65535)%n");
+
+	        sez("2) Literal numerici");
+	        long popolazione = 8_000_000_000L;     // suffisso L per long
+	        float prezzo = 9.99f;                  // suffisso f per float
+	        double pi = 3.14159;                   // double di default
+	        System.out.println("popolazione = " + popolazione);
+	        System.out.println("prezzo = " + prezzo);
+	        System.out.println("pi = " + pi);
+
+	        sez("3) Widening (implicito, sicuro)");
+	        int i = 42;
+	        long L = i;            // int -> long
+	        double d = L;          // long -> double
+	        System.out.printf("int i=%d -> long L=%d -> double d=%.1f%n", i, L, d);
+
+	        sez("4) Narrowing (esplicito, può perdere info)");
+	        double dd = 5.9;
+	        int ii = (int) dd;     // 5 (parte decimale TRONCATA)
+	        System.out.printf("double %.1f -> (int) = %d%n", dd, ii);
+
+	        int big = 260;
+	        byte bb = (byte) big;  // overflow modulo 256: 260 % 256 = 4
+	        System.out.printf("int %d -> (byte) = %d%n", big, bb);
+
+	        sez("5) Promozione aritmetica (byte/short/char => int nelle espressioni)");
+	        byte a = 50, b = 60;
+	        // byte c = a + b;     // ERRORE di compilazione: a+b è int
+	        byte c = (byte) (a + b);  // cast esplicito
+	        int sommaAsInt = a + b;   // int risultante dall'espressione
+	        System.out.printf("byte a=%d, b=%d -> (byte)(a+b)=%d, come int=%d%n", a, b, c, sommaAsInt);
+
+	        sez("6) char come codice Unicode");
+	        char ch = 'A';
+	        int code = ch;                 // widening: char -> int (codice 65)
+	        char euro = '\u20AC';          // Euro (UNICODE U+20AC)
+	        char fromInt = (char) 9731;    // 9731 = U+2603 (omini di neve)
+	        System.out.printf("char '%c' ha codice int %d%n", ch, code);
+	        System.out.printf("Euro: '%c', fromInt(9731): '%c'%n", euro, fromInt);
+
+	        sez("7) Stringhe ≠ cast: parse/format");
+	        String sNum = "123";
+	        int parsed = Integer.parseInt(sNum);   // da String a int
+	        String back = String.valueOf(parsed);  // da numero a String
+	        System.out.printf("parse \"123\" -> %d, valueOf(%d) -> \"%s\"%n", parsed, parsed, back);
+
+	        sez("8) Esempi rapidi giusti/sbagliati");
+	        // Sbagliato: // double d2 = (Double) 5;           // NON si castano wrapper diversi
+	        double d2 = ((Integer) 5).doubleValue(); // corretto: via metodo del wrapper
+	        System.out.println("((Integer)5).doubleValue() = " + d2);
+
+	        // Cast catena per sicurezza (esempio didattico)
+	        long grande = 1_000_000_000_000L;
+	        int troncato = (int) grande; // perde info se > int MAX
+	        System.out.printf("long %d -> (int) = %d (attenzione alla perdita!)%n", grande, troncato);
+
+	        sez("9) Mini quiz (atteso in commento)");
+	        System.out.println("((int)12.99) = " + (int)12.99); // atteso: 12
+	        System.out.println("(byte)130    = " + (byte)130);  // atteso: -126
+	    }
+
+	    private static void sez(String titolo) {
+	        System.out.println();
+	        System.out.println("=== " + titolo + " ===");
+	    }
+	
+	}
+
+}

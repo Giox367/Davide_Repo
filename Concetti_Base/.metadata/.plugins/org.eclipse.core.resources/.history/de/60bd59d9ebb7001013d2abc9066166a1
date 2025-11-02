@@ -1,0 +1,124 @@
+package Main;
+
+public class Funzioni {
+
+	public static void main(String[] args) {
+		 public static void main(String[] args) {
+		        sez("1) Metodi void senza/ con parametri");
+		        printSaluto();                 // stampa un saluto generico
+		        saluta("Anna");                // stampa un saluto personalizzato
+
+		        sez("2) Metodi con ritorno (int/double)");
+		        int s = somma(3, 5);           // 8
+		        System.out.println("somma(3,5) = " + s);
+		        double sd = somma(2.5, 3.2);   // overload double
+		        System.out.println("somma(2.5,3.2) = " + sd);
+
+		        sez("3) Varargs: media di N valori");
+		        System.out.println("media(10,20,30) = " + media(10, 20, 30));
+		        try {
+		            System.out.println("media() = " + media());   // lancerà eccezione
+		        } catch (IllegalArgumentException e) {
+		            System.out.println("Eccezione attesa: " + e.getMessage());
+		        }
+
+		        sez("4) Booleani e piccoli helper");
+		        System.out.println("isPari(10) = " + isPari(10));
+		        System.out.println("formattaNome(\"mario\",\"rossi\") = " + formattaNome("mario", "rossi"));
+
+		        sez("5) Pass-by-value: primitivi vs array");
+		        int n = 7;
+		        inc(n); // NON cambia n fuori (pass-by-value)
+		        System.out.println("Dopo inc(n), n = " + n + " (immutato)");
+		        n = incEritorna(n);           // se assegno il risultato, cambia
+		        System.out.println("Dopo incEritorna(n), n = " + n);
+
+		        int[] a = {1, 2, 3};
+		        incPrimo(a);                  // modifica l'array (si passa il riferimento per valore)
+		        System.out.println("Dopo incPrimo(a), a[0] = " + a[0]);
+
+		        sez("6) Ricorsione: fattoriale");
+		        System.out.println("fattoriale(5) ricorsivo = " + fattoriale(5));
+		        System.out.println("fattorialeIter(5)        = " + fattorialeIter(5));
+
+		        sez("7) Mini quiz (atteso in commento)");
+		        System.out.println("somma(4, somma(1,2)) = " + somma(4, somma(1,2))); // 7
+		        System.out.println("isPari(somma(2,3))   = " + isPari(somma(2,3)));   // false
+		    }
+
+		    // --- Sezioni (utility di stampa) ---
+		    private static void sez(String titolo) {
+		        System.out.println();
+		        System.out.println("=== " + titolo + " ===");
+		    }
+
+		    // --- 1) Metodi void ---
+		    static void printSaluto() {
+		        System.out.println("Ciao dal metodo!");
+		    }
+
+		    static void saluta(String nome) {
+		        System.out.println("Ciao, " + nome + "!");
+		    }
+
+		    // --- 2) Metodi con ritorno + overloading ---
+		    static int somma(int a, int b) {
+		        return a + b;
+		    }
+
+		    static double somma(double a, double b) { // overload
+		        return a + b;
+		    }
+
+		    // --- 3) Varargs ---
+		    static double media(int... valori) {
+		        if (valori.length == 0) throw new IllegalArgumentException("Nessun valore");
+		        int s = 0;
+		        for (int v : valori) s += v;
+		        return (double) s / valori.length;
+		    }
+
+		    // --- 4) Booleani e formattazione ---
+		    static boolean isPari(int n) {
+		        return n % 2 == 0;
+		    }
+
+		    static String formattaNome(String nome, String cognome) {
+		        return cap(nome) + " " + cap(cognome);
+		    }
+
+		    private static String cap(String s) {
+		        if (s == null || s.isEmpty()) return s;
+		        return s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
+		    }
+
+		    // --- 5) Pass-by-value ---
+		    static void inc(int x) {          // non restituisce: l'effetto resta locale
+		        x++;
+		    }
+
+		    static int incEritorna(int x) {   // ritorna il nuovo valore
+		        return x + 1;
+		    }
+
+		    static void incPrimo(int[] arr) { // modifica il contenuto dell'array
+		        if (arr != null && arr.length > 0) arr[0]++;
+		    }
+
+		    // --- 6) Ricorsione vs iterazione ---
+		    static long fattoriale(int n) {
+		        if (n < 0) throw new IllegalArgumentException("n deve essere >= 0");
+		        if (n == 0 || n == 1) return 1;
+		        return n * fattoriale(n - 1);
+		    }
+
+		    static long fattorialeIter(int n) {
+		        if (n < 0) throw new IllegalArgumentException("n deve essere >= 0");
+		        long res = 1;
+		        for (int k = 2; k <= n; k++) res *= k;
+		        return res;
+		    }
+
+	}
+
+}

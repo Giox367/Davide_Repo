@@ -1,0 +1,9 @@
+package Test;
+
+public class Somma {
+
+	public int somma  ( int numero, int numero2) { 
+	
+	return numero+numero2;
+	}
+}
