@@ -70,6 +70,19 @@ public class App {
         sez("9) Mini quiz (atteso in commento)");
         System.out.println("((int)12.99) = " + (int)12.99); // atteso: 12
         System.out.println("(byte)130    = " + (byte)130);  // atteso: -126
+        
+        
+        double x = 12.99;
+        int y = (int) x;
+        System.out.println(y);
+        
+        
+        int z = 130;
+        byte t = (byte) z;
+        System.out.println(t);
+        
+        
+        
     }
 
     private static void sez(String titolo) {

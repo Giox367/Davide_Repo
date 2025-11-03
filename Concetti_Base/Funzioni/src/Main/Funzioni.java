@@ -44,6 +44,26 @@ public class Funzioni {
 		        sez("7) Mini quiz (atteso in commento)");
 		        System.out.println("somma(4, somma(1,2)) = " + somma(4, somma(1,2))); // 7
 		        System.out.println("isPari(somma(2,3))   = " + isPari(somma(2,3)));   // false
+		        
+		        
+		        int x = somma(1, 2);
+		        int y = somma(4, x);
+		        System.out.println("somma(4, somma(1,2)= " + y);
+		        
+		        int z = somma(2,3);
+		        System.out.println("isPari(somma(2,3)) = " + isPari(z));
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
+		        
 		    }
 
 		    // --- Sezioni (utility di stampa) ---

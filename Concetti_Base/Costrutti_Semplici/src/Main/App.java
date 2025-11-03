@@ -121,6 +121,31 @@ public class App {
         System.out.println("(3 > 2 && 2 > 1) = " + (3 > 2 && 2 > 1));  // true
         System.out.println("Operatore ternario: 7%2==0 ? \"pari\" : \"dispari\" -> "
                 + (7 % 2 == 0 ? "pari" : "dispari"));                  // "dispari"
+        
+        
+        int p = 3;
+        int y = 2;
+        int z = 1;
+        boolean a = p > y;
+        boolean b = y > z;
+        if (a && b) { 
+        	System.out.println("true");       }
+        
+        
+        int q = 7;
+        boolean n = q % 2 == 0;
+        String numero = n ? "pari" : " dispari";
+        System.out.println(numero);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     private static void sez(String titolo) {
