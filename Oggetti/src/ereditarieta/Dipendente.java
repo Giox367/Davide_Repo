@@ -1,4 +1,4 @@
-package Ereditarietà;
+package ereditarieta;
 
 class Dipendente extends Persona {
     private String ruolo;
